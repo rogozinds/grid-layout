@@ -1,0 +1,115 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
+<link rel="import" href="grid-item.html">
+
+<dom-module id="grid-layout">
+    <template>
+        <style>
+            :host {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+            }
+        </style>
+        <content id="content" select="grid-item"></content>
+        <iron-media-query query="{{qmobile}}" query-matches="{{mobile}}"
+                          on-query-matches-changed="_resizeMob"></iron-media-query>
+        <iron-media-query query="{{qtablet}}" query-matches="{{tablue}}"
+                          on-query-matches-changed="_resizeTablet"></iron-media-query>
+        <iron-media-query query="{{qdesktop}}" query-matches="{{desktop}}"
+                          on-query-matches-changed="_resizeDesktop"></iron-media-query>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'grid-layout',
+            properties: {
+                cellTypes: {
+                    type: Object,
+                    value: function () {
+                        return []
+                    }
+                },
+                mode: {
+                    type: String
+                },
+                mobile: {
+                    type: Boolean,
+                    notify: true,
+                    reflectToAttribute: true
+                },
+                width: {
+                    type: Number
+                },
+                cellheight: {
+                    type: Number
+                },
+                margintop: {
+                    type: Number,
+                    value: 0
+                }
+            },
+            _setItemCoords(item, count) {
+                var width = item.getAttribute('width') * this.colWidth;
+                //1-small 2 - medium 3 - large
+                var height = item.getAttribute('height') * this.cellheight;
+                item.style.width = width + '%';
+                item.style.height = height + 'px';
+                var obj = {'width': item.getAttribute('width'), 'item': item};
+                this.cellTypes[count] = obj;
+
+            },
+            _resizeMob: function (e) {
+                if (e.target.queryMatches) {
+                    this._resize("mobile")
+                }
+            },
+            _resizeTablet: function (e) {
+                if (e.target.queryMatches) {
+                    this._resize("tablet")
+                }
+            },
+            _resizeDesktop: function (e) {
+                if (e.target.queryMatches) {
+                    this._resize("desktop")
+                }
+            },
+            _resize: function (mode) {
+                var that = this;
+                if (this.cellTypes) {
+                    this.cellTypes.forEach(function (v) {
+                        var item = v["item"];
+                        item.style.width = that._calculateWidth(v['width'], mode);
+                    });
+                }
+            },
+            _calculateWidth: function (type, mode) {
+                //type: 1-small 2 - medium 3 - large
+                var width;
+                if (mode == "mobile") {
+                    width = type * 50;
+                } else if (mode == "tablet") {
+                    width = 33.3333333 * type;
+                }
+                else {
+                    width = 25 * type;
+                }
+                return width + "%";
+
+            },
+            ready: function () {
+                this.qmobile = '(max-width:500px)';
+                this.qtablet = '(max-width: 900px) and (min-width: 501px)';
+                this.qdesktop = '(max-width: 1900px) and (min-width: 901px)';
+                this.colWidth = 100 / this.width;
+                var count = 0;
+                for (item of this.getContentChildren('#content')) {
+                    this._setItemCoords(item, count);
+                    count++;
+                }
+            }
+        });
+    </script>
+</dom-module>

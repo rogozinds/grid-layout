@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "testTimeout": 120000,
+    "plugins": {
+    "local": {
+        "browsers": ["chrome"]
+    }
+}
+}
