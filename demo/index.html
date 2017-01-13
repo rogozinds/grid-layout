@@ -37,39 +37,12 @@
             box-sizing: border-box;
             /*padding:2px;*/
         }
-        .container {
-            padding:15px;
+        .item {
             width:100%;
-            height:200px;
-            background-color: #41e09e;
+            height:100%;
         }
-        .row {
-            margin-left: -15px;
-            margin-right: 15px;
-            background-color:#e0cd41;
-            width:100%;
-            height: 200px;
-        }
-        .col {
-            position: relative;
-            background-color:#e07b41;
-            display: inline-block;
-            padding-left:15px;
-        }
-        .row .col:nth-child(1) {
-            width:33%;
-            /*left:0%;*/
-        }
-        .row .col:nth-child(2) {
-            width:33%;
-            /*left:33%;*/
-        }
-        .row .col:nth-child(3) {
-            width:33%;
-            /*left:66%;*/
-        }
-        .col-1{
-
+        .nested {
+            /*min-width: 150px;*/
         }
     </style>
 </head>
@@ -79,62 +52,42 @@
     <h3>Basic grid-layout Demo</h3>
     <demo-snippet>
         <template>
-            <div class="container">
-                <div class="row">
-                    <div class="col col-1">1 foo</div>
-                    <div class="col col-2">2 foo</div>
-                    <div class="col col-3">3 bar foo</div>
-                </div>
-            </div>
             <div id="layout">
-                <grid-layout id="gridlayout" width="4" cellheight="300" margintop="10">
+                <grid-layout id="gridlayout" width="4" cellheight="50" margintop="10">
                     <grid-item width="1" height="1">
-                        <div style="margin:10px;">
-                            <paper-button raised>Click</paper-button>
-                            <paper-input label="Input label" value="Some value"></paper-input>
-                        </div>
-                    </grid-item>
-                    <grid-item width="3" height="1">
-                        <!--<div style="width:100%; height:100%; background-color:yellow;"></div>-->
-                            <img  style="max-width:100%; max-height: 100%;" src="http://www.planwallpaper.com/static/images/1080p-wallpaper-14854-15513-hd-wallpapers.jpg"/>
+                        <div class="item" style="background-color:blue;"></div>
                     </grid-item>
                     <grid-item width="1" height="1">
-                        <paper-listbox selected="0">
-                            <paper-item>Item 1</paper-item>
-                            <paper-item>Item 2</paper-item>
-                            <paper-item>Item 3</paper-item>
-                        </paper-listbox>
-                    </grid-item><<
+                        <div class="item" style="background-color:red;"></div>
+                     </grid-item>
                     <grid-item width="1" height="1">
-                        <vaadin-pie-chart id="pie">
-                            <chart-title>Browser market shares at a specific website, 2010</chart-title>
-                            <tooltip point-format="{series.name}: <b>{point.percentage:.1f}%</b>">
-                            </tooltip>
-                            <plot-options>
-                                <pie allow-point-select="true" cursor="pointer">
-                                    <data-labels enabled="true"
-                                                 format="<b>{point.name}</b>:    {point.percentage:.1f} %">
-                                    </data-labels>
-                                </pie>
-                            </plot-options>
+                        <div class="item" style="background-color:green;"></div>
+                    </grid-item>
+                    <grid-item width="1" height="1">
+                        <div class="item" style="background-color:yellow;"></div>
+                    </grid-item>
 
-                            <data-series name="Browser share">
-                                <data>
-                                    ["Firefox", 45.0],
-                                    ["IE", 26.8],
-                                    ["Chrome", 12.8],
-                                    ["Safari", 8.5],
-                                    ["Opera", 6.2],
-                                    ["Others", 0.7]
-                                </data>
-                            </data-series>
-                        </vaadin-pie-chart>
+                    <grid-item width="4" height="4">
+                        <div class="item" style="background-color:#0b97c4"></div>
                     </grid-item>
-                    <grid-item y="1" width="2" height="1">
-                        6
+                    <grid-item width="3" height="4">
+                        <div class="item" style="background-color:yellow"></div>
                     </grid-item>
-                    <grid-item y="1" width="4" height="1">
-                        7
+                    <grid-item width="1" height="4">
+                        <grid-layout id="gridlayout" width="4" cellheight="50" margintop="10">
+                            <grid-item class="nested" width="1" height="1">
+                                <div class="item" style="background-color:blue;"></div>
+                            </grid-item>
+                            <grid-item class="nested" width="1" height="1">
+                                <div class="item" style="background-color:red;"></div>
+                            </grid-item>
+                            <grid-item class="nested" width="1" height="1">
+                                <div class="item" style="background-color:green;"></div>
+                            </grid-item>
+                            <grid-item class="nested" width="1" height="1">
+                                <div class="item" style="background-color:yellow;"></div>
+                            </grid-item>
+                        </grid-layout>
                     </grid-item>
 
                 </grid-layout>

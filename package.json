@@ -1,0 +1,26 @@
+{
+  "name": "grid-layout",
+  "version": "1.0.0",
+  "description": "&#34;Responsive layout, that allows to specify how the components will look inside it&#34;",
+  "main": "wct.conf.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "css-element-queries": "^0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogozinds/grid-layout.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rogozinds/grid-layout/issues"
+  },
+  "homepage": "https://github.com/rogozinds/grid-layout#readme"
+}

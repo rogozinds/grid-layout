@@ -11,15 +11,13 @@
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: row;
+                align-content:flex-start;
             }
         </style>
         <content id="content" select="grid-item"></content>
-        <iron-media-query query="{{qmobile}}" query-matches="{{mobile}}"
-                          on-query-matches-changed="_resizeMob"></iron-media-query>
-        <iron-media-query query="{{qtablet}}" query-matches="{{tablue}}"
-                          on-query-matches-changed="_resizeTablet"></iron-media-query>
-        <iron-media-query query="{{qdesktop}}" query-matches="{{desktop}}"
-                          on-query-matches-changed="_resizeDesktop"></iron-media-query>
+        <iron-media-query query="{{qmobile}}" on-query-matches-changed="_resizeMob"></iron-media-query>
+        <iron-media-query query="{{qtablet}}" on-query-matches-changed="_resizeTablet"></iron-media-query>
+        <iron-media-query query="{{qdesktop}}" on-query-matches-changed="_resizeDesktop"></iron-media-query>
     </template>
 
     <script>
@@ -89,9 +87,9 @@
                 //type: 1-small 2 - medium 3 - large
                 var width;
                 if (mode == "mobile") {
-                    width = type * 50;
+                    width = type * 100;
                 } else if (mode == "tablet") {
-                    width = 33.3333333 * type;
+                    width = 50 * type;
                 }
                 else {
                     width = 25 * type;
