@@ -7,6 +7,7 @@
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../google-map/google-map.html">
     <link rel="import" href="../grid-layout-resize.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
@@ -31,9 +32,18 @@
             box-sizing: border-box;
             /*padding:2px;*/
         }
+
         .item {
-            width:100%;
-            height:100%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .item.trump {
+            margin: auto;
+        }
+
+        .item.trump > img {
+            display: none;
         }
     </style>
 </head>
@@ -44,41 +54,64 @@
     <demo-snippet>
         <template>
             <div id="layout">
-                <grid-layout-resize  id="gridlayout" width="4" cellheight="100" margintop="10">
-                    <grid-item width="1" height="1">
-                        <div class="item" style="background-color:blue;">
-
+                <grid-layout-resize id="gridlayout" width="4" cellheight="100" margintop="10">
+                    <grid-item width="1" height="2">
+                        <div class="item" style="background-color:#FFCDD2;">
                         </div>
                     </grid-item>
-                    <grid-item width="1" height="1">
-                        <div class="item" style="background-color:red;"></div>
-                     </grid-item>
-                    <grid-item width="1" height="1">
-                        <div class="item" style="background-color:green;"></div>
+                    <grid-item width="1" height="2">
+                        <div class="item" style="background-color:#BBDEFB;">
+                        </div>
                     </grid-item>
-                    <grid-item width="1" height="1">
-                        <div class="item" style="background-color:yellow;"></div>
-                    </grid-item>
+                    <grid-item height="2" width="1">
+                        <grid-layout-resize id="gridlayout" width="4" cellheight="100" margintop="10" minwidth4="800"
+                                            minwidth2="550">
+                            <grid-item width="1" height="1">
+                                <div class="item" style="background-color:#7C4DFF;"></div>
+                            </grid-item>
+                            <grid-item width="1" height="1">
+                                <div class="item" style="background-color:#7C4DFF;"></div>
+                            </grid-item>
+                            <grid-item width="1" height="1">
+                                <div class="item" style="background-color:#7C4DFF;"></div>
+                            </grid-item>
+                            <grid-item width="1" height="1">
+                                <div class="item" style="background-color:#7C4DFF;"></div>
+                            </grid-item>
+                        </grid-layout-resize>
 
+                    </grid-item>
+                    <grid-item width="1" height="2">
+                        <div class="item" style="background-color:#F0F4C3"></div>
+                    </grid-item>
                     <grid-item width="4" height="4">
-                        <div class="item" style="background-color:#0b97c4"></div>
+                        <google-map api-key="AIzaSyAf1BMEFVD-zs8N9gfMJh9zjk4gNbYP_dk" latitude="60.455137"
+                                    longitude="22.294726" api-key="1234"></google-map>
                     </grid-item>
                     <grid-item width="2" height="4">
-                        <div class="item" style="background-color:yellow"></div>
+                        <grid-item width="4" height="4">
+                            <google-map api-key="AIzaSyAf1BMEFVD-zs8N9gfMJh9zjk4gNbYP_dk" latitude="35.076730"
+                                        longitude="107.263894" api-key="1234"></google-map>
+                        </grid-item>
                     </grid-item>
                     <grid-item width="2" height="4">
-                        <grid-layout-resize id="gridlayout" width="4" cellheight="100" margintop="10" minwidth4="800" minwidth2="550">
+                        <grid-layout-resize id="gridlayout" width="4" cellheight="100" margintop="10" minwidth4="800"
+                                            minwidth2="550">
                             <grid-item width="1" height="1">
-                                <div class="item" style="background-color:blue;"></div>
+                                <div class="item trump" style="background-color:#FFCDD2;">
+                                </div>
                             </grid-item>
                             <grid-item width="1" height="1">
-                                <div class="item" style="background-color:red;"></div>
+                                <div class="item trump" style="background-color:#EF5350;">
+                                </div>
                             </grid-item>
                             <grid-item width="1" height="1">
-                                <div class="item" style="background-color:green;"></div>
+                                <div class="item trump" style="background-color:#B2EBF2;">
+                                </div>
                             </grid-item>
                             <grid-item width="1" height="1">
-                                <div class="item" style="background-color:yellow;"></div>
+                                <div class="item trump" style="background-color:#A1887F;">
+                                </div>
                             </grid-item>
                         </grid-layout-resize>
                     </grid-item>

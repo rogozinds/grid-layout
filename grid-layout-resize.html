@@ -88,12 +88,17 @@
 
             },
             _setItemCoords(item, count) {
+
                 var width = item.getAttribute('width') * this.colWidth;
                 //1-small 2 - medium 3 - large
-                var height = item.getAttribute('height') * this.cellheight;
-                item.style.width = width + '%';
-                item.style.height = height + 'px';
-                var obj = {'width': item.getAttribute('width'), 'item': item};
+                if(item.getAttribute('height')) {
+                    var height = item.getAttribute('height') * this.cellheight;
+                    item.style.height = height + 'px';
+                } else {
+                    item.style.height="auto";
+                }
+                    item.style.width = width + '%';
+                    var obj = {'width': item.getAttribute('width'), 'item': item};
                 this.cellTypes[count] = obj;
 
             },
