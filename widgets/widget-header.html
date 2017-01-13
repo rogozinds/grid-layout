@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+</head>
+<body>
+<dom-module id="widget-header">
+    <template>
+        <style>
+            :host {
+              font-family: "Open Sans", sans-serif;
+              padding: 1px 0 1px 21px;
+            }
+            h1 {
+              color: #197de1;
+              line-height: 1.1;
+              font-weight: 500;
+              font-size: 14px;
+              text-transform: uppercase;
+              letter-spacing: 0;
+            }
+        </style>
+        <h1>[[header]]</h1>
+    </template>
+
+    <script>
+            Polymer({
+                is: 'widget-header',
+                properties: {
+                    header:{
+                        type: String
+                    }
+                }
+        });
+    </script>
+</dom-module>
+
+</body>
+</html>

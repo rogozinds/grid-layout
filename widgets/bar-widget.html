@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <link rel="import" href="../../vaadin-charts/vaadin-bar-chart.html">
+    <link rel="import" href="widget-header.html">
+</head>
+<body>
+<dom-module id="bar-widget">
+    <template>
+        <style>
+        :host {
+          font-family: "Open Sans", sans-serif;
+          height:100%;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        #content {
+          flex-grow: 1;
+          display: flex;
+        }
+        vaadin-bar-chart{
+          width: 100%;
+        }
+        </style>
+
+        <widget-header header="Top Grossing Movies"></widget-header>
+        <div id="content">
+          <vaadin-bar-chart id="basic-bar">
+            <chart></chart>
+            <chart-title text=""></chart-title>
+            <x-axis tick-width="0">
+                <labels enabled="false"></labels>
+            </x-axis>
+            <y-axis min="0">
+                <chart-title text=""></chart-title>
+                <labels overflow="justify"></labels>
+            </y-axis>
+            <tooltip value-suffix=" millions"></tooltip>
+            <plot-options>
+                <bar group-padding="0">
+                </bar>
+            </plot-options>
+            <legend></legend>
+            <data-series name="Left Behind">
+                <data>2</data>
+            </data-series>
+            <data-series name="Maze Runner">
+                <data>63</data>
+            </data-series>
+            <data-series name="The Equalizer">
+                <data>61</data>
+            </data-series>
+            <data-series name="Annabelle">
+                <data>31</data>
+            </data-series>
+            <data-series name="Gone Girl">
+                <data>87</data>
+            </data-series>
+            <data-series name="Box Trolls">
+                <data>74</data>
+            </data-series>
+        </vaadin-bar-chart>
+      </div>
+    </template>
+
+    <script>
+            Polymer({
+                is: 'bar-widget',
+                properties: {
+                }
+        });
+    </script>
+</dom-module>
+
+</body>
+</html>

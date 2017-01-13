@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <link rel="import" href="../../vaadin-charts/vaadin-bar-chart.html">
+    <link rel="import" href="widget-header.html">
+</head>
+<body>
+<dom-module id="notes-widget">
+    <template>
+        <style>
+            :host {
+              font-family: "Open Sans", sans-serif;
+              height:100%;
+              display: flex;
+              flex-direction: column;
+              align-items: stretch;
+            }
+
+            #content {
+              flex-grow: 1;
+              display: flex;
+            }
+            textarea{
+              width: 100%;
+              box-sizing: border-box;
+              border: none;
+              border-top: 1px solid #dfdfdf;
+              padding: 20px 20px 0;
+              line-height: 20px;
+              font-size: 13px;
+              background: #fffdf2 url(img/notes-bg.png) repeat;
+              background-attachment: local;
+              color: #545145;
+              overflow: auto;
+              resize: none;
+            }
+        </style>
+        <widget-header header="Notes"></widget-header>
+        <div id="content">
+          <textarea>
+            Remember to:
+            · Zoom in and out in the Sales view
+            · Filter the transactions and drag a set of them to the Reports tab
+            · Create a new report
+            · Change the schedule of the movie theater
+          </textarea>
+        </div>
+    </template>
+
+    <script>
+            Polymer({
+                is: 'notes-widget',
+                properties: {
+                }
+        });
+    </script>
+</dom-module>
+
+</body>
+</html>
