@@ -2,79 +2,68 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="grid-item.html">
 <script src="js/ElementQueries.js"></script>
 <script src="js/ResizeSensor.js"></script>
-<dom-module id="grid-layout">
+<dom-module id="grid-layout-resize">
     <template>
         <style>
             :host {
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: row;
-                align-content:flex-start;
+                align-content: flex-start;
             }
         </style>
         <content id="content" select="grid-item"></content>
-        <iron-media-query query="{{qmobile}}" on-query-matches-changed="_resizeMob"></iron-media-query>
-        <iron-media-query query="{{qtablet}}" on-query-matches-changed="_resizeTablet"></iron-media-query>
-        <iron-media-query query="{{qdesktop}}" on-query-matches-changed="_resizeDesktop"></iron-media-query>
+
     </template>
 
     <script>
         Polymer({
-            is: 'grid-layout',
+            is: 'grid-layout-resize',
+            behaviors: [
+                Polymer.IronResizableBehavior
+            ],
+            listeners: {
+                'iron-resize': '_onIronResize'
+            },
+            _onIronResize: function () {
+                var width=this.parentElement.clientWidth;
+                if (width > this.minwidth4) {
+                    this._resize("desktop")
+                } else if (width > this.minwidth2) {
+                    this._resize("tablet")
+                } else {
+                    this._resize("mobile");
+                }
+
+
+            },
             properties: {
+                minwidth2: {
+                    type: Number,
+                    value: 400
+                },
+                minwidth4: {
+                    type: Number,
+                    value: 800
+                },
                 cellTypes: {
                     type: Object,
                     value: function () {
                         return []
                     }
                 },
-                mode: {
-                    type: String
-                },
-                mobile: {
-                    type: Boolean,
-                    notify: true,
-                    reflectToAttribute: true
-                },
-                width: {
-                    type: Number
-                },
                 cellheight: {
                     type: Number
                 },
-                margintop: {
-                    type: Number,
-                    value: 0
+                mode: {
+                    type: String
                 }
             },
-            _setItemCoords(item, count) {
-                var width = item.getAttribute('width') * this.colWidth;
-                //1-small 2 - medium 3 - large
-                var height = item.getAttribute('height') * this.cellheight;
-                item.style.width = width + '%';
-                item.style.height = height + 'px';
-                var obj = {'width': item.getAttribute('width'), 'item': item};
-                this.cellTypes[count] = obj;
 
-            },
-            _resizeMob: function (e) {
-                if (e.target.queryMatches) {
-                    this._resize("mobile")
-                }
-            },
-            _resizeTablet: function (e) {
-                if (e.target.queryMatches) {
-                    this._resize("tablet")
-                }
-            },
-            _resizeDesktop: function (e) {
-                if (e.target.queryMatches) {
-                    this._resize("desktop")
-                }
-            },
             _resize: function (mode) {
                 var that = this;
                 if (this.cellTypes) {
@@ -98,10 +87,17 @@
                 return width + "%";
 
             },
+            _setItemCoords(item, count) {
+                var width = item.getAttribute('width') * this.colWidth;
+                //1-small 2 - medium 3 - large
+                var height = item.getAttribute('height') * this.cellheight;
+                item.style.width = width + '%';
+                item.style.height = height + 'px';
+                var obj = {'width': item.getAttribute('width'), 'item': item};
+                this.cellTypes[count] = obj;
+
+            },
             ready: function () {
-                this.qmobile = '(max-width:500px)';
-                this.qtablet = '(max-width: 900px) and (min-width: 501px)';
-                this.qdesktop = '(max-width: 1900px) and (min-width: 901px)';
                 this.colWidth = 100 / this.width;
                 var count = 0;
                 for (item of this.getContentChildren('#content')) {
